@@ -1,18 +1,16 @@
-version: '3.7'
-
 services:
-  aeroalpes:
+  alpespartners:
     build:
       context: .
-      dockerfile: aeroalpes.Dockerfile
-    container_name: aeroalpes
-    hostname: aeroalpes
+      dockerfile: Dockerfile
+    container_name: alpespartners
+    hostname: alpespartners
     depends_on:
       - db
     ports:
       - "5000:5000"
     environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/aeroalpes
+      - DATABASE_URL=postgresql://user:password@db:5432/alpespartners
     networks:
       - default
 
@@ -23,7 +21,7 @@ services:
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=aeroalpes
+      - POSTGRES_DB=alpespartners
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
     ports:

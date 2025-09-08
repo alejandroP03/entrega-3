@@ -26,7 +26,7 @@ class ServicioReserva(Servicio):
     
     def crear_reserva(self, reserva_dto: ReservaDTO) -> ReservaDTO:
         reserva: Reserva = self.fabrica_vuelos.crear_objeto(reserva_dto, MapeadorReserva())
-        reserva.crear_reserva(reserva)
+        
 
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioReservas.__class__)
 

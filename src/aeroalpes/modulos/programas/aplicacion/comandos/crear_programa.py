@@ -1,7 +1,7 @@
 
 from aeroalpes.seedwork.aplicacion.comandos import Comando
 from aeroalpes.modulos.programas.aplicacion.dto import ProgramaDTO
-from .base import ProgramaComandoBaseHandler
+from .base import CrearProgramaBaseHandler
 from dataclasses import dataclass, field
 from aeroalpes.seedwork.aplicacion.comandos import ejecutar_commando as comando
 
@@ -14,7 +14,7 @@ from aeroalpes.modulos.programas.dominio.repositorios import RepositorioPrograma
 class CrearPrograma(Comando):
     programa: ProgramaDTO
 
-class CrearProgramaHandler(ProgramaComandoBaseHandler):
+class CrearProgramaHandler(CrearProgramaBaseHandler):
     
     def handle(self, comando: CrearPrograma):
         print("Creando programa...")
@@ -30,3 +30,11 @@ class CrearProgramaHandler(ProgramaComandoBaseHandler):
 
         UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, programa)
         UnidadTrabajoPuerto.commit()
+
+        programa = repositorio.obtener_por_id(programa.id)
+        
+
+@comando.register(CrearPrograma)
+def ejecutar_comando_crear_programa(comando: CrearPrograma):
+    handler = CrearProgramaHandler()
+    handler.handle(comando)

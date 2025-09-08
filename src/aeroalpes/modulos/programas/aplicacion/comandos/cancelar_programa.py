@@ -1,6 +1,6 @@
 
 from aeroalpes.seedwork.aplicacion.comandos import Comando
-from .base import ProgramaComandoBaseHandler
+from .base import CancelarProgramaBaseHandler
 from dataclasses import dataclass, field
 from aeroalpes.seedwork.aplicacion.comandos import ejecutar_commando as comando
 
@@ -12,7 +12,7 @@ from aeroalpes.modulos.programas.dominio.repositorios import RepositorioPrograma
 class CancelarPrograma(Comando):
     id_programa: str
 
-class CancelarProgramaHandler(ProgramaComandoBaseHandler):
+class CancelarProgramaHandler(CancelarProgramaBaseHandler):
     
     def handle(self, comando: CancelarPrograma):
         repositorio = self.repositorio_fabrica.crear_objeto(RepositorioProgramas.__class__)
@@ -21,3 +21,8 @@ class CancelarProgramaHandler(ProgramaComandoBaseHandler):
 
         UnidadTrabajoPuerto.registrar_batch(repositorio.actualizar, programa)
         UnidadTrabajoPuerto.commit()
+
+@comando.register(CancelarPrograma)
+def ejecutar_comando_cancelar_programa(comando: CancelarPrograma):
+    handler = CancelarProgramaHandler()
+    handler.handle(comando)

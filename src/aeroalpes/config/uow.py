@@ -18,15 +18,11 @@ fabrica_mapeador = MapeadorPrograma()
 @ejecutar_commando.register(CrearPrograma)
 def ejecutar_comando_crear_programa(comando: CrearPrograma):
     handler = CrearProgramaHandler()
-    handler.repositorio_fabrica = fabrica_repositorio
-    handler.mapeador_fabrica = fabrica_mapeador
     handler.handle(comando)
 
 @ejecutar_commando.register(CancelarPrograma)
 def ejecutar_comando_cancelar_programa(comando: CancelarPrograma):
     handler = CancelarProgramaHandler()
-    handler.repositorio_fabrica = fabrica_repositorio
-    handler.mapeador_fabrica = fabrica_mapeador
     handler.handle(comando)
 
 class UnidadTrabajoSQLAlchemy(UnidadTrabajo):

@@ -6,6 +6,16 @@ from flask_swagger import swagger
 # Identifica el directorio base
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+def registrar_handlers():
+    import aeroalpes.modulos.programas.aplicacion
+    import aeroalpes.modulos.afiliaciones.aplicacion
+    import aeroalpes.modulos.vuelos.aplicacion
+
+def importar_modelos_alchemy():
+    import aeroalpes.modulos.vuelos.infraestructura.dto
+    import aeroalpes.modulos.programas.infraestructura.dto
+    import aeroalpes.modulos.afiliaciones.infraestructura.dto
+
 def create_app(configuracion={}):
     # Init la aplicacion de Flask
     app = Flask(__name__, instance_relative_config=True)
@@ -27,6 +37,9 @@ def create_app(configuracion={}):
     from aeroalpes.config.db import init_db, db
     
     init_db(app)
+    importar_modelos_alchemy()
+    registrar_handlers()
+
 
     with app.app_context():
         db.create_all()

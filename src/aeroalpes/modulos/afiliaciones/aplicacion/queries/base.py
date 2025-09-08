@@ -1,10 +1,11 @@
-
+from aeroalpes.modulos.afiliaciones.infraestructura.fabricas import FabricaRepositorio
+from aeroalpes.modulos.afiliaciones.infraestructura.mapeadores import MapeadorAfiliacion
 from aeroalpes.seedwork.aplicacion.queries import QueryHandler
 
 class AfiliacionQueryBaseHandler(QueryHandler):
     def __init__(self):
-        self._repositorio_fabrica = None
-        self._mapeador_fabrica = None
+        self._repositorio_fabrica = FabricaRepositorio()
+        self._mapeador_fabrica = MapeadorAfiliacion()
 
     @property
     def repositorio_fabrica(self):

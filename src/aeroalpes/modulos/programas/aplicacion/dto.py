@@ -11,8 +11,8 @@ class ProgramaDTO(DTO):
     estado: str
     limite_clicks_por_ip: int
     limite_velocidad_eventos: int
-    blacklist_ip: list[str]
-    geo_permitido: list[str]
+    blacklist_ip: bool
+    geo_permitido: bool
     duracion_unix_time: int
     aplica_desde: str
     fecha_inicio: str

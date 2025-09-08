@@ -15,6 +15,7 @@ class Programa(AgregacionRaiz):
     marca_anunciante: ov.Marca = field(default=None)
     estado: ov.EstadoPrograma = field(default=None)
     ventana_atribucion: ov.VentanaAtribucion = field(default=None)
+    politicas_cumplimiento_antifraude: ov.PoliticasCumplimientoAntiFraude = field(default=None)
     fecha_inicio: str = field(default=None)
     fecha_finalizacion: str = field(default=None)
     presupuesto: float = field(default=None)
@@ -26,6 +27,7 @@ class Programa(AgregacionRaiz):
         self.marca_anunciante = programa.marca_anunciante
         self.estado = programa.estado
         self.ventana_atribucion = programa.ventana_atribucion
+        self.politicas_cumplimiento_antifraude = programa.politicas_cumplimiento_antifraude
         self.fecha_inicio = programa.fecha_inicio
         self.fecha_finalizacion = programa.fecha_finalizacion
         self.presupuesto = programa.presupuesto

@@ -18,6 +18,10 @@ class MapeadorPrograma(Mapeador):
             marca_anunciante_id=entidad.marca_anunciante.id,
             marca_anunciante_nombre=entidad.marca_anunciante.nombre,
             estado=entidad.estado.estado,
+            limite_clicks_por_ip=entidad.politicas_cumplimiento_antifraude.limite_clicks_por_ip,
+            limite_velocidad_eventos=entidad.politicas_cumplimiento_antifraude.limite_velocidad_eventos,
+            blacklist_ip=entidad.politicas_cumplimiento_antifraude.blacklist_ip,
+            geo_permitido=entidad.politicas_cumplimiento_antifraude.geo_permitido,
             duracion_unix_time=entidad.ventana_atribucion.duracion_unix_time,
             aplica_desde=entidad.ventana_atribucion.aplica_desde,
             fecha_inicio=entidad.fecha_inicio,
@@ -34,6 +38,12 @@ class MapeadorPrograma(Mapeador):
             tipo_programa=TipoPrograma(estado=dto.tipo_programa),
             marca_anunciante=Marca(id=dto.marca_anunciante_id, nombre=dto.marca_anunciante_nombre),
             estado=EstadoPrograma(estado=dto.estado),
+            politicas_cumplimiento_antifraude=PoliticasCumplimientoAntiFraude(
+                limite_clicks_por_ip=dto.limite_clicks_por_ip,
+                limite_velocidad_eventos=dto.limite_velocidad_eventos,
+                blacklist_ip=dto.blacklist_ip,
+                geo_permitido=dto.geo_permitido
+            ),
             ventana_atribucion=VentanaAtribucion(
                 duracion_unix_time=dto.duracion_unix_time,
                 aplica_desde=dto.aplica_desde

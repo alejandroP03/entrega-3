@@ -1,10 +1,13 @@
 
 from aeroalpes.seedwork.aplicacion.comandos import ComandoHandler
+from aeroalpes.modulos.programas.infraestructura.fabricas import FabricaRepositorio
+from aeroalpes.modulos.programas.dominio.fabricas import FabricaProgramas
 
-class ProgramaComandoBaseHandler(ComandoHandler):
+
+class CrearProgramaBaseHandler(ComandoHandler):
     def __init__(self):
-        self._repositorio_fabrica = None
-        self._mapeador_fabrica = None
+        self._repositorio_fabrica: FabricaRepositorio = FabricaRepositorio()
+        self._mapeador_fabrica: FabricaProgramas = FabricaProgramas()
 
     @property
     def repositorio_fabrica(self):
@@ -13,3 +16,16 @@ class ProgramaComandoBaseHandler(ComandoHandler):
     @property
     def mapeador_fabrica(self):
         return self._mapeador_fabrica
+
+class CancelarProgramaBaseHandler(ComandoHandler):
+    def __init__(self):
+        self._repositorio_fabrica = FabricaRepositorio()
+        self._mapeador_fabrica = FabricaProgramas()
+
+    @property
+    def repositorio_fabrica(self):
+        return self._repositorio_fabrica
+
+    @property
+    def mapeador_fabrica(self):
+        return self._mapeador_fabrica      

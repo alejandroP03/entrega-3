@@ -38,10 +38,10 @@ class MapeadorPrograma(RepMap):
             marca_anunciante_id=entidad.marca_anunciante.id,
             marca_anunciante_nombre=entidad.marca_anunciante.nombre,
             estado=entidad.estado.estado,
-            limite_clicks_por_ip=entidad.ventana_atribucion.limite_clicks_por_ip,
-            limite_velocidad_eventos=entidad.ventana_atribucion.limite_velocidad_eventos,
-            blacklist_ip=entidad.ventana_atribucion.blacklist_ip,
-            geo_permitido=entidad.ventana_atribucion.geo_permitido,
+            limite_clicks_por_ip=entidad.politicas_cumplimiento_antifraude.limite_clicks_por_ip,
+            limite_velocidad_eventos=entidad.politicas_cumplimiento_antifraude.limite_velocidad_eventos,
+            blacklist_ip=entidad.politicas_cumplimiento_antifraude.blacklist_ip,
+            geo_permitido=entidad.politicas_cumplimiento_antifraude.geo_permitido,
             duracion_unix_time=entidad.ventana_atribucion.duracion_unix_time,
             aplica_desde=str(entidad.ventana_atribucion.aplica_desde),
             fecha_inicio=entidad.fecha_inicio,
@@ -58,6 +58,12 @@ class MapeadorPrograma(RepMap):
         programa.ventana_atribucion = VentanaAtribucion(
             duracion_unix_time=dto.duracion_unix_time,
             aplica_desde=dto.aplica_desde
+        )
+        programa.politicas_cumplimiento_antifraude = PoliticasCumplimientoAntiFraude(
+            limite_clicks_por_ip=dto.limite_clicks_por_ip,
+            limite_velocidad_eventos=dto.limite_velocidad_eventos,
+            blacklist_ip=dto.blacklist_ip,
+            geo_permitido=dto.geo_permitido
         )
         programa.fecha_inicio = dto.fecha_inicio
         programa.fecha_finalizacion = dto.fecha_finalizacion

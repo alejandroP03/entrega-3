@@ -1,5 +1,33 @@
 from aeroalpes.config.db import db
 from aeroalpes.seedwork.infraestructura.uow import UnidadTrabajo, Batch
+from aeroalpes.modulos.programas.dominio.eventos import ProgramaCancelado
+from aeroalpes.modulos.afiliaciones.aplicacion.handlers import ProgramaCanceladoHandler
+from pydispatch import dispatcher
+
+from aeroalpes.modulos.programas.infraestructura.fabricas import FabricaRepositorio
+from aeroalpes.modulos.programas.aplicacion.mapeadores import MapeadorPrograma
+from aeroalpes.seedwork.aplicacion.comandos import ejecutar_commando
+from aeroalpes.modulos.programas.aplicacion.comandos.crear_programa import CrearPrograma, CrearProgramaHandler
+from aeroalpes.modulos.programas.aplicacion.comandos.cancelar_programa import CancelarPrograma, CancelarProgramaHandler
+
+dispatcher.connect(ProgramaCanceladoHandler.handle_programa_cancelado, sender=ProgramaCancelado)
+
+fabrica_repositorio = FabricaRepositorio()
+fabrica_mapeador = MapeadorPrograma()
+
+@ejecutar_commando.register(CrearPrograma)
+def ejecutar_comando_crear_programa(comando: CrearPrograma):
+    handler = CrearProgramaHandler()
+    handler.repositorio_fabrica = fabrica_repositorio
+    handler.mapeador_fabrica = fabrica_mapeador
+    handler.handle(comando)
+
+@ejecutar_commando.register(CancelarPrograma)
+def ejecutar_comando_cancelar_programa(comando: CancelarPrograma):
+    handler = CancelarProgramaHandler()
+    handler.repositorio_fabrica = fabrica_repositorio
+    handler.mapeador_fabrica = fabrica_mapeador
+    handler.handle(comando)
 
 class UnidadTrabajoSQLAlchemy(UnidadTrabajo):
 

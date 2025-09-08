@@ -32,10 +32,11 @@ def create_app(configuracion={}):
         db.create_all()
 
      # Importa Blueprints
-    from . import vuelos
+    from . import vuelos, programas
 
     # Registro de Blueprints
     app.register_blueprint(vuelos.bp)
+    app.register_blueprint(programas.bp)
 
     @app.route("/spec")
     def spec():

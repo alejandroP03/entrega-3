@@ -64,7 +64,7 @@ class UnidadTrabajo(ABC):
 
     def _publicar_eventos_dominio(self, batch):
         for evento in self._obtener_eventos(batches=[batch]):
-            dispatcher.send(signal=f'{type(evento).__name__}Dominio', evento=evento)
+            dispatcher.send(signal=type(evento), evento=evento)
 
 def is_flask():
     try:

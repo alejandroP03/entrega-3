@@ -2,6 +2,7 @@
 from aeroalpes.config.db import db
 from aeroalpes.modulos.programas.dominio.repositorios import RepositorioProgramas
 from aeroalpes.modulos.programas.dominio.entidades import Programa
+from aeroalpes.modulos.programas.dominio.excepciones import ProgramaNoEncontradoExcepcion
 from .dto import Programa as ProgramaDTO
 from .mapeadores import MapeadorPrograma
 import uuid
@@ -15,8 +16,12 @@ class RepositorioProgramasPostgreSQL(RepositorioProgramas):
     def mapeador(self):
         return self._mapeador
 
+    from aeroalpes.modulos.programas.dominio.excepciones import ProgramaNoEncontradoExcepcion
+
     def obtener_por_id(self, id: uuid.UUID) -> Programa:
-        programa_dto = db.session.query(ProgramaDTO).filter_by(id=str(id)).one()
+        programa_dto = db.session.query(ProgramaDTO).filter_by(id=id).first()
+        if not programa_dto:
+            raise ProgramaNoEncontradoExcepcion()
         return self.mapeador.dto_a_entidad(programa_dto)
 
     def obtener_todos(self) -> list[Programa]:

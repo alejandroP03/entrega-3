@@ -8,6 +8,7 @@ from .dto import ProgramaDTO
 class MapeadorProgramaDTOJson(AppMap):
     def externo_a_dto(self, externo: dict) -> ProgramaDTO:
         return ProgramaDTO(
+            id="",
             nombre=externo.get('nombre'),
             tipo_programa=externo.get('tipo_programa'),
             marca_anunciante_id=externo.get('marca_anunciante_id'),
@@ -33,6 +34,7 @@ class MapeadorPrograma(RepMap):
 
     def entidad_a_dto(self, entidad: Programa) -> ProgramaDTO:
         return ProgramaDTO(
+            id=str(entidad.id),
             nombre=entidad.nombre,
             tipo_programa=entidad.tipo_programa.estado,
             marca_anunciante_id=entidad.marca_anunciante.id,

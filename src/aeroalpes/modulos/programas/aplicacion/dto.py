@@ -4,6 +4,7 @@ from aeroalpes.seedwork.aplicacion.dto import DTO
 
 @dataclass(frozen=True)
 class ProgramaDTO(DTO):
+    id: str
     nombre: str
     tipo_programa: str
     marca_anunciante_id: str

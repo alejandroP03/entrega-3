@@ -1,5 +1,5 @@
 from .entidades import Programa
-from .excepciones import TipoObjetoNoExisteEnDominioProgramaExcepcion
+from .excepciones import TipoObjetoNoExisteEnDominioProgramasExcepcion
 from aeroalpes.seedwork.dominio.repositorios import Mapeador, Repositorio
 from aeroalpes.seedwork.dominio.fabricas import Fabrica
 from aeroalpes.seedwork.dominio.entidades import Entidad
@@ -12,4 +12,4 @@ class FabricaProgramas(Fabrica):
             fabrica_programa = FabricaProgramas()
             return fabrica_programa.crear_objeto(obj, mapeador)
         else:
-            raise TipoObjetoNoExisteEnDominioProgramaExcepcion()
+            raise TipoObjetoNoExisteEnDominioProgramasExcepcion()

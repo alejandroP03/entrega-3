@@ -14,9 +14,6 @@ from aeroalpes.seedwork.dominio.excepciones import ExcepcionDominio
 
 bp = api.crear_blueprint('programas', '/programas')
 
-@bp.route('/hello', methods=('GET',))
-def hello():
-    return 'Hello, World!'
 
 @bp.route('/', methods=('POST',))
 def crear_programa():
@@ -26,9 +23,9 @@ def crear_programa():
         programa_dto = map_programa.externo_a_dto(programa_dict)
         
         comando = CrearPrograma(programa=programa_dto)
+
         ejecutar_commando(comando)
-        dto_final = comando.programa
-        return Response(map_programa.dto_a_externo(programa_dto), status=202, mimetype='application/json')
+        return Response(json.dumps(map_programa.dto_a_externo(comando.programa)), status=202, mimetype='application/json')
     except ExcepcionDominio as e:
         return Response(json.dumps(dict(error=str(e))), status=400, mimetype='application/json')
 

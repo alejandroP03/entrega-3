@@ -32,6 +32,7 @@ class CrearProgramaHandler(CrearProgramaBaseHandler):
         UnidadTrabajoPuerto.commit()
 
         programa = repositorio.obtener_por_id(programa.id)
+        comando.programa = mapeador.entidad_a_dto(programa)
         
 
 @comando.register(CrearPrograma)
